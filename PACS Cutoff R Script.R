@@ -63,4 +63,4 @@ EmPACS.plot <- ggplot(CutoffTests, aes(x=1-Specificity, y=Sensitivity)) +
   SpTheme()
 EmPACS.plot
 
-ggsave()
+ggsave(EmPACS.plot, "EmPACS.plot.png", dpi=500, width=6, height=5)
