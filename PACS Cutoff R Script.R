@@ -56,10 +56,15 @@ CutoffTests$Specificity[25] <- CutoffTests$Specificity[25]  - 0.0001
 EmPACS.plot <- ggplot(CutoffTests, aes(x=1-Specificity, y=Sensitivity)) + 
   geom_point() + 
   geom_line() + 
-  geom_text(aes(label=cutoff), nudge_y=0.03, check_overlap = T) +
+  #geom_text(aes(label=cutoff), nudge_y=0.03) +
   geom_line(data=data.frame(x=c(0,1), y=c(0,1)), aes(x=x,y=y)) +
+  annotate("rect", fill="white", colour="black", xmin = .03, xmax = .4, ymin = .875, ymax = 1.05) +
+  annotate("text", label="Optimal Cutpoint >=15\nSensitivity = 0.671\nSpecificity = 0.815", 
+           x=0.05, y=0.9, colour="black", size=4, fontface="bold", hjust=0, vjust=0) +
+  geom_line(data=data.frame(x=c(.17, 0.1849057), y=c(0.875, .7)), aes(x=x, y=y), 
+            arrow = arrow(length=unit(0.10,"in"), ends="last"), size = 1) +
   scale_x_continuous(limits=c(0,1.05), expand=c(0,0)) + 
-  scale_y_continuous(limits=c(0,1.05), expand=c(0,0)) + 
+  scale_y_continuous(limits=c(0,1.06), expand=c(0,0)) + 
   SpTheme()
 EmPACS.plot
 
@@ -76,6 +81,8 @@ max(CutoffTests$MeanSS)
 CutoffTests$Distance <- abs((1-CutoffTests$Specificity) - CutoffTests$Sensitivity)/sqrt(2)
 max(CutoffTests$Distance)
 #0.3438853, also usiing cutoff of 15
+
+
 
 
 
