@@ -66,3 +66,16 @@ EmPACS.plot
 ggsave(EmPACS.plot, filename="EmPACS.plot.png", dpi=500, width=6, height=5)
 
 
+#Calculating Optimum
+#best average sensitivity and specificity
+CutoffTests$MeanSS <- (CutoffTests$Sensitivity + CutoffTests$Specificity)/2
+max(CutoffTests$MeanSS)
+#0.7431636, using cutoff of 15
+
+#maximum perpendicular distance from 50/50 line
+CutoffTests$Distance <- abs((1-CutoffTests$Specificity) - CutoffTests$Sensitivity)/sqrt(2)
+max(CutoffTests$Distance)
+#0.3438853, also usiing cutoff of 15
+
+
+
