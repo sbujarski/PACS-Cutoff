@@ -56,11 +56,13 @@ CutoffTests$Specificity[25] <- CutoffTests$Specificity[25]  - 0.0001
 EmPACS.plot <- ggplot(CutoffTests, aes(x=1-Specificity, y=Sensitivity)) + 
   geom_point() + 
   geom_line() + 
-  #geom_text(aes(label=cutoff), nudge_y=0.02) +
+  geom_text(aes(label=cutoff), nudge_y=0.02, check_overlap = T) +
   geom_line(data=data.frame(x=c(0,1), y=c(0,1)), aes(x=x,y=y)) +
   scale_x_continuous(limits=c(0,1.05), expand=c(0,0)) + 
   scale_y_continuous(limits=c(0,1.05), expand=c(0,0)) + 
   SpTheme()
 EmPACS.plot
 
-ggsave(EmPACS.plot, "EmPACS.plot.png", dpi=500, width=6, height=5)
+ggsave(EmPACS.plot, filename="EmPACS.plot.png", dpi=500, width=6, height=5)
+
+
