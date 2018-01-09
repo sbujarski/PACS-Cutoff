@@ -22,3 +22,19 @@ library(ROCR) #For crossvalidation AUC curve
 library(scales) #for percent axis
 library(Deducer)
 
+#IMPORT DATA----
+EmPACS <- read.csv("Emily PACS Dataset 010818.csv", header=T, na.strings=c("NA"))
+SpDesc(EmPACS)
+
+#recode craving symptom, NA=NA, 1,2=0, 3=1
+EmPACS$SCID.CraveC <- ifelse(EmPACS$SCIDE14C==3,1,
+                             ifelse(EmPACS$SCIDE14C<3,0,NA))
+table(EmPACS$SCIDE14C)
+table(EmPACS$SCID.CraveC)
+
+EmPACS$PACS <- rowSums(EmPACS[c("pacs1", "pacs2", "pacs3", "pacs4", "pacs5")])
+SpDesc(EmPACS$PACS)
+SpHist(EmPACS, variable="PACS")
+
+
+
